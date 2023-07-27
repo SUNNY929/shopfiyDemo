@@ -1,0 +1,15 @@
+.gunchung-dividing-line-wrap{
+    padding-top: var(--gunchung-dividing-line-padding-top);
+    padding-bottom: var(--gunchung-dividing-line-padding-bottom);
+    display: block;
+}
+.gunchung-dividing-line-wrap::before{
+    content: "";
+    position: relative;
+    display: block;
+    border: none;
+    border-top-width: var(--gunchung-dividing-line-width);
+    border-top-color: var(--gunchung-dividing-line-color);
+    border-top-style: var(--gunchung-dividing-line-type);
+    top: var(--gunchung-dividing-line-position-top);
+}

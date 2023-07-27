@@ -1,0 +1,107 @@
+img-comparison-slider {
+    overflow: hidden;
+    width: 100%;
+    border-radius: var(--gunchung-img-comparison-slider-pic-box-type);
+    outline: none;
+}
+
+img-comparison-slider [slot='second'] {
+    display: none;
+    outline: none;
+}
+
+img-comparison-slider.rendered {
+    visibility: inherit;
+    outline: none;
+}
+
+img-comparison-slider.rendered [slot='second'] {
+    display: unset;
+}
+
+
+@media screen and (min-width:769px) {
+    .gc-comparison-section-wrapper {
+        display: flex;
+        align-items: center;
+        padding: 0 30px;
+      justify-content: center;
+    }
+    .gc-one-quarter {
+        text-align: center;
+        width: 25%;
+        padding:0 10px;
+    }
+    .gc-one-quarter:empty {
+        display: none;
+    }
+    .gc-one-half {
+        width: var(--gunchung-img-comparison-slider-pic-box-range);
+    }
+}
+@media screen and (max-width:768px) {
+    .gc-comparison-section-wrapper {
+        /* display: flex; */
+        /* align-items: center; */
+    }
+    .gc-one-quarter {
+        width: 100%;
+        padding: 30px 0;
+    }
+    .gc-one-half {
+        width: 100%;
+    }
+}
+.gc-section-header {
+    width: 100%;
+    text-align: center;
+}
+.gc-section-header-title {
+    padding: 10px 0;
+    margin-bottom: 0;
+    line-height: 60px;
+}
+.gc-main-title {
+    font-size: var(--gunchung-img-comparison-slider-M-title-FS);
+    color: var(--gunchung-img-comparison-slider-M-title-col);
+    font-weight: var(--gunchung-img-comparison-slider-M-title-FW);
+}
+.gc-sub-title {
+    font-size: var(--gunchung-img-comparison-slider-S-title-FS);
+    color: var(--gunchung-img-comparison-slider-S-title-col);
+    font-weight: var(--gunchung-img-comparison-slider-S-title-FW);
+    margin-top: 0;
+}
+.gc-one-quarter-L {
+    font-size: var(--gunchung-img-comparison-slider-L-title-FS);
+    color: var(--gunchung-img-comparison-slider-L-title-col);
+    font-weight: var(--gunchung-img-comparison-slider-L-title-FW);
+    text-align: var(--gunchung-img-comparison-slider-L-title-TA);
+}
+.gc-one-quarter-R {
+    font-size: var(--gunchung-img-comparison-slider-R-title-FS);
+    color: var(--gunchung-img-comparison-slider-R-title-col);
+    font-weight: var(--gunchung-img-comparison-slider-R-title-FW);
+    text-align: var(--gunchung-img-comparison-slider-R-title-TA);
+}
+
+.ICS-T-padding-H-class {
+    height: var(--gunchung-img-comparison-slider-T-padding-H);
+    width: 100%;
+}
+.ICS-T-padding-H-class:empty {
+    display: block;
+}
+.ICS-B-padding-H-class {
+    height: var(--gunchung-img-comparison-slider-B-padding-H);
+    width: 100%;
+}
+.ICS-B-padding-H-class:empty {
+    display: block;
+}
+.gc-ICS-Box {
+  position:relative;
+  left:50%;
+  transform:translate(-50%,0);
+  max-width:var(--wrapper-mw);
+}

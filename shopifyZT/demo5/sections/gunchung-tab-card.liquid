@@ -1,0 +1,200 @@
+{{ 'gunchung-tab-card.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'gunchung-tab-card.js' | asset_url }}" defer="defer"></script>
+
+<div class="gunchung-tab-box">
+  <div class="gunchung-tab-top">
+    <div class="gunchung-tab-top-box"><img src="{{section.settings.GTC-topleft-pic | image_url: width: 500}}" alt=""></div>
+    <div class="gunchung-tab-top-box">
+      {%- for block in section.blocks -%}
+        <div class="gunchung-tab-top-box-block">
+          <div class="gunchung-tab-top-box-btn"style="
+          --gunchung-tab-card-M-title-FS:{{ section.settings.GTC-M-title-FS }}px;
+          --gunchung-tab-card-M-title-FW:{{ section.settings.GTC-M-title-FW }};
+          --gunchung-tab-card-M-title-col:{{ section.settings.GTC-M-title-col }};
+          --gunchung-tab-card-M-title-hover-col:{{ section.settings.GTC-M-title-hover-col }};
+          --gunchung-tab-card-M-BG-col:{{ section.settings.GTC-M-BG-col }};
+          ">
+            {{ block.settings.GTC-card-title }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  {%- for block in section.blocks -%}
+    <div class="gunchung-tab-con">
+      {% assign gc_tard = block.settings.GTC-card-sub-title | split: "///." %}
+      {%- for item in gc_tard -%}
+        {% assign GC_Title = item | split: "//." %}
+        <div class="gunchung-tab-con-box">
+          <div class="gunchung-tab-con-left" style="
+          --gunchung-tab-card-S-title-FS:{{ section.settings.GTC-S-title-FS }}px;
+          --gunchung-tab-card-S-title-FW:{{ section.settings.GTC-S-title-FW }};
+          --gunchung-tab-card-S-title-col:{{ section.settings.GTC-S-title-col }};
+          --gunchung-tab-card-S-BG-col:{{ section.settings.GTC-S-BG-col }};
+          ">
+            <img src="./png1/deng.png" alt="">
+            <div>{{ GC_Title[0] }}</div>
+          </div>
+          <div class="gunchung-tab-con-right" style="
+          --gunchung-tab-card-C-title-FS:{{ section.settings.GTC-C-title-FS }}px;
+          --gunchung-tab-card-C-title-FW:{{ section.settings.GTC-C-title-FW }};
+          --gunchung-tab-card-C-title-col:{{ section.settings.GTC-C-title-col }};
+          --gunchung-tab-card-C-BG-col:{{ section.settings.GTC-C-BG-col }};
+          ">
+            {% assign GC_Con = GC_Title[1] | split: "/." %}
+            {%- for content in GC_Con -%}
+              <div>
+                {{ content }}
+              </div>
+            {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "光程切换卡片",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "GTC-topleft-pic",
+        "label": "左上角logo展示"
+      }, {
+        "type": "header",
+        "content": "tab标题设置"
+      }, {
+        "type": "range",
+        "label": "tab标题字体大小",
+        "id": "GTC-M-title-FS",
+        "min": 20,
+        "max": 70,
+        "step": 1,
+        "unit": "px",
+        "default": 28
+      }, {
+        "type": "range",
+        "label": "tab标题字体粗细",
+        "id": "GTC-M-title-FW",
+        "min": 100,
+        "max": 700,
+        "step": 50,
+        "default": 500
+      }, {
+        "type": "color",
+        "label": "tab标题字体颜色",
+        "id": "GTC-M-title-col",
+        "default": "#000000"
+      }, {
+        "type": "color",
+        "label": "tab标题字体选中颜色",
+        "id": "GTC-M-title-hover-col",
+        "default": "#EC8F8F"
+      },  {
+        "type": "color",
+        "label": "tab标题背景颜色",
+        "id": "GTC-M-BG-col",
+        "default": "#62E3FF"
+      }, {
+        "type": "header",
+        "content": "副标题设置"
+      },  {
+        "type": "range",
+        "label": "副标题字体大小",
+        "id": "GTC-S-title-FS",
+        "min": 10,
+        "max": 60,
+        "step": 1,
+        "unit": "px",
+        "default": 22
+      }, {
+        "type": "range",
+        "label": "副标题字体粗细",
+        "id": "GTC-S-title-FW",
+        "min": 100,
+        "max": 700,
+        "step": 50,
+        "default": 400
+      }, {
+        "type": "color",
+        "label": "副标题字体颜色",
+        "id": "GTC-S-title-col",
+        "default": "#000000"
+      }, {
+        "type": "color",
+        "label": "副标题背景颜色",
+        "id": "GTC-S-BG-col",
+        "default": "#6BD49C"
+      }, {
+        "type": "header",
+        "content": "卡片内容设置"
+      },  {
+        "type": "range",
+        "label": "卡片内容字体大小",
+        "id": "GTC-C-title-FS",
+        "min": 10,
+        "max": 60,
+        "step": 1,
+        "unit": "px",
+        "default": 22
+      }, {
+        "type": "range",
+        "label": "卡片内容字体粗细",
+        "id": "GTC-C-title-FW",
+        "min": 100,
+        "max": 700,
+        "step": 50,
+        "default": 400
+      }, {
+        "type": "color",
+        "label": "卡片内容字体颜色",
+        "id": "GTC-C-title-col",
+        "default": "#000000"
+      }, {
+        "type": "color",
+        "label": "卡片内容背景颜色",
+        "id": "GTC-C-BG-col",
+        "default": "#218C53"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "item",
+        "name": "标签卡片",
+        "settings": [
+          {
+            "type": "header",
+            "content": "标签卡片标题设置"
+          }, {
+            "type": "text",
+            "id": "GTC-card-title",
+            "label": "标签卡片标题",
+            "default": "ONE BEDROOM"
+          }, {
+            "type": "textarea",
+            "id": "GTC-card-sub-title",
+            "label": "标签卡片内容",
+            "default": "标题//.内容1/.内容2 ///. 标题//.内容1/.内容2/.内容3 ///. 标题//.内容1"
+          }
+        ]
+      }
+
+    ],
+    "presets": [
+      {
+        "name": "光程切换卡片"
+      }
+    ],
+    "locales": {},
+    "enabled_on": {
+      "templates": ["*"],
+      "groups": ["*"]
+    }
+
+  }
+{% endschema %}

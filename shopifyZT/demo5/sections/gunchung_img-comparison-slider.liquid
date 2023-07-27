@@ -1,0 +1,318 @@
+{{ 'gunchung_img-comparison-slider.css' | asset_url | stylesheet_tag }}
+
+{% comment %} 顶部填充 {% endcomment %}
+<div class="ICS-T-padding-H-class" style="
+            --gunchung-img-comparison-slider-T-padding-H:{{ section.settings.ICS-T-padding-H }}px;
+            "></div>
+<div class="gc-ICS-Box">
+  {% comment %} 主副标题区域 {% endcomment %}
+  <div class="gc-section-header">
+    <div class="gc-section-header-title gc-main-title" style="
+                                                          --gunchung-img-comparison-slider-M-title-FS:{{ section.settings.ICS-M-title-FS }}px;
+                                                          --gunchung-img-comparison-slider-M-title-col:{{ section.settings.ICS-M-title-col }};
+                                                          --gunchung-img-comparison-slider-M-title-FW:{{ section.settings.ICS-M-title-FW }};
+                                                          ">{{ section.settings.T_text }}</div>
+    <div class="gc-section-header-title gc-sub-title" style="
+                                                          --gunchung-img-comparison-slider-S-title-FS:{{ section.settings.ICS-S-title-FS }}px;
+                                                          --gunchung-img-comparison-slider-S-title-col:{{ section.settings.ICS-S-title-col }};
+                                                          --gunchung-img-comparison-slider-S-title-FW:{{ section.settings.ICS-S-title-FW }};
+                                                        ">{{ section.settings.T_text_2 }}</div>
+  </div>
+
+  {% comment %} 文字与图片区域 {% endcomment %}
+  <div class="gc-comparison-section-wrapper">
+    <div class="gc-one-quarter gc-one-quarter-L" style="
+                                                      --gunchung-img-comparison-slider-L-title-FS:{{ section.settings.ICS-L-title-FS }}px;
+                                                      --gunchung-img-comparison-slider-L-title-col:{{ section.settings.ICS-L-title-col }};
+                                                      --gunchung-img-comparison-slider-L-title-FW:{{ section.settings.ICS-L-title-FW }};
+                                                      --gunchung-img-comparison-slider-L-title-TA:{{ section.settings.ICS-L-title-TA }};
+                                                      ">{{ section.settings.L_text }}</div>
+    <div class="comparison-images gc-one-half" style="
+                                                                        --gunchung-img-comparison-slider-pic-box-range:{{ section.settings.ICS-pic-slide_range }}%;
+                                                                        ">
+      {%- if section.settings.B_pic or section.settings.A_pic -%}
+        <img-comparison-slider hover="{{ section.settings.ICS-pic-slide_type }}"style="
+                                                                                                                                      --gunchung-img-comparison-slider-pic-box-type:{{ section.settings.ICS-pic-box-type }};
+                                                                                                                                      ">
+          <img
+            slot="first"
+            width="100%"
+            loading="lazy"
+            src="{{section.settings.B_pic | image_url: width: 500}}">
+          <img
+            slot="second"
+            loading="lazy"
+            width="100%"
+            src="{{section.settings.A_pic | image_url: width: 500}}">
+        </img-comparison-slider>
+      {%- else -%}
+        <img-comparison-slider hover="{{ section.settings.ICS-pic-slide_type }}"style="
+                                                                                                                          --gunchung-img-comparison-slider-pic-box-type:{{ section.settings.ICS-pic-box-type }};
+                                                                                                                          ">
+          <img
+            slot="first"
+            width="100%"
+            loading="lazy"
+            src="https://cdn.shopify.com/s/files/1/0597/6267/1797/files/1_92acff53-a768-47e3-82e7-42f42250d8f7_1024x1024.png?v=1663481613">
+          <img
+            slot="second"
+            loading="lazy"
+            width="100%"
+            src="https://cdn.shopifycdn.net/s/files/1/0597/6267/1797/files/2_1cbe1d82-4fa1-4ad9-b5f1-3358c24ae099_1024x1024.png?v=1663481613">
+        </img-comparison-slider>
+      {%- endif -%}
+
+    </div>
+    <div class="gc-one-quarter gc-one-quarter-R" style="
+                                                        --gunchung-img-comparison-slider-R-title-FS:{{ section.settings.ICS-R-title-FS }}px;
+                                                        --gunchung-img-comparison-slider-R-title-col:{{ section.settings.ICS-R-title-col }};
+                                                        --gunchung-img-comparison-slider-R-title-FW:{{ section.settings.ICS-R-title-FW }};
+                                                        --gunchung-img-comparison-slider-R-title-TA:{{ section.settings.ICS-R-title-TA }};
+                                                      ">{{ section.settings.R_text }}</div>
+  </div>
+
+</div>
+{% comment %} 底部填充 {% endcomment %}
+<div class="ICS-B-padding-H-class" style="
+            --gunchung-img-comparison-slider-B-padding-H:{{ section.settings.ICS-B-padding-H }}px;
+            "></div>
+
+{% comment %} 参数配置区域 {% endcomment %}
+{% schema %}
+  {
+    "name": "光程图片对比",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "图片设置"
+      },
+      {
+        "type": "image_picker",
+        "id": "B_pic",
+        "label": "原图（添加完效果图后展示）"
+      },
+      {
+        "type": "image_picker",
+        "id": "A_pic",
+        "label": "效果图（原图与效果图请采用同一比例）"
+      },
+      {
+        "type": "select",
+        "label": "图片展示类型",
+        "id": "ICS-pic-box-type",
+        "options": [
+          {
+            "value": "50%",
+            "label": "圆形"
+          }, {
+            "value": "0%",
+            "label": "矩形"
+          }
+        ],
+        "default": "50%"
+      }, {
+        "type": "range",
+        "label": "图片展示范围（PC，将左右标题文本清空可获得更大的展示空间）",
+        "id": "ICS-pic-slide_range",
+        "min": 50,
+        "max": 100,
+        "step": 1,
+        "default": 50
+      }, {
+        "type": "select",
+        "label": "图片交互类型",
+        "id": "ICS-pic-slide_type",
+        "options": [
+          {
+            "value": "ture",
+            "label": "移入"
+          }, {
+            "value": "false",
+            "label": "拖拽"
+          }
+        ],
+        "default": "false"
+      }, {
+        "type": "header",
+        "content": "标题设置"
+      }, {
+        "type": "range",
+        "label": "主标题字体大小",
+        "id": "ICS-M-title-FS",
+        "min": 20,
+        "max": 70,
+        "step": 1,
+        "unit": "px",
+        "default": 48
+      }, {
+        "type": "range",
+        "label": "主标题字体粗细",
+        "id": "ICS-M-title-FW",
+        "min": 100,
+        "max": 700,
+        "step": 50,
+        "default": 600
+      }, {
+        "type": "color",
+        "label": "主标题字体颜色",
+        "id": "ICS-M-title-col",
+        "default": "#000000"
+      }, {
+        "type": "text",
+        "id": "T_text",
+        "label": "主标题文本",
+        "default": "Welcome to our website!"
+      }, {
+        "type": "range",
+        "label": "副标题字体大小",
+        "id": "ICS-S-title-FS",
+        "min": 10,
+        "max": 60,
+        "step": 1,
+        "unit": "px",
+        "default": 36
+      }, {
+        "type": "range",
+        "label": "副标题字体粗细",
+        "id": "ICS-S-title-FW",
+        "min": 100,
+        "max": 700,
+        "step": 50,
+        "default": 600
+      }, {
+        "type": "color",
+        "label": "副标题字体颜色",
+        "id": "ICS-S-title-col",
+        "default": "#000000"
+      }, {
+        "type": "text",
+        "id": "T_text_2",
+        "label": "副标题文本",
+        "default": "Welcome to our website!"
+      }, {
+        "type": "header",
+        "content": "左右文本设置"
+      }, {
+        "type": "range",
+        "label": "左标题字体大小",
+        "id": "ICS-L-title-FS",
+        "min": 10,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 22
+      }, {
+        "type": "range",
+        "label": "左标题字体粗细",
+        "id": "ICS-L-title-FW",
+        "min": 100,
+        "max": 700,
+        "step": 50,
+        "default": 400
+      }, {
+        "type": "color",
+        "label": "左标题字体颜色",
+        "id": "ICS-L-title-col",
+        "default": "#000000"
+      }, {
+        "type": "select",
+        "label": "左标题对齐方式",
+        "id": "ICS-L-title-TA",
+        "options": [
+          {
+            "value": "left",
+            "label": "左对齐"
+          }, {
+            "value": "center",
+            "label": "居中对齐"
+          }, {
+            "value": "right",
+            "label": "右对齐"
+          }
+        ],
+        "default": "center"
+      }, {
+        "type": "textarea",
+        "id": "L_text",
+        "label": "左侧文本",
+        "default": "Welcome to our website!"
+      }, {
+        "type": "range",
+        "label": "右标题字体大小",
+        "id": "ICS-R-title-FS",
+        "min": 10,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 22
+      }, {
+        "type": "range",
+        "label": "右标题字体粗细",
+        "id": "ICS-R-title-FW",
+        "min": 100,
+        "max": 700,
+        "step": 50,
+        "default": 400
+      }, {
+        "type": "color",
+        "label": "右标题字体颜色",
+        "id": "ICS-R-title-col",
+        "default": "#000000"
+      }, {
+        "type": "select",
+        "label": "右标题对齐方式",
+        "id": "ICS-R-title-TA",
+        "options": [
+          {
+            "value": "left",
+            "label": "左对齐"
+          }, {
+            "value": "center",
+            "label": "居中对齐"
+          }, {
+            "value": "right",
+            "label": "右对齐"
+          }
+        ],
+        "default": "center"
+      }, {
+        "type": "textarea",
+        "id": "R_text",
+        "label": "右侧文本",
+        "default": "Welcome to our website!"
+      }, {
+        "type": "header",
+        "content": "分区填充"
+      }, {
+        "type": "range",
+        "label": "顶部填充",
+        "id": "ICS-T-padding-H",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 0
+      }, {
+        "type": "range",
+        "label": "底部填充",
+        "id": "ICS-B-padding-H",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 0
+      }
+    ],
+    "presets": [
+      {
+        "name": "光程图片对比"
+      }
+    ],
+    "locales": {},
+    "enabled_on": {
+      "templates": ["*"],
+      "groups": ["*"]
+    }
+  }
+{% endschema %}

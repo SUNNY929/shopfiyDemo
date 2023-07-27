@@ -1,0 +1,220 @@
+{{ 'swiper.min.css' | asset_url | stylesheet_tag }}
+{{ 'swiper.min.js' | asset_url | script_tag }}
+{{ 'jquery-3.7.0.min.js' | asset_url | script_tag }}
+
+{{ 'gunchung-carousel-drag.css' | asset_url | stylesheet_tag }}
+<div class="gunchung-carousel-box" style="
+    --gunchung-carousel-drag-background-color:{{ section.settings.CD-box-back-col }};
+    "><div class="swiper-container" id="gunchung-slide-container">
+    <div class="swiper-wrapper">
+      {%- for block in section.blocks -%}
+        <div class="swiper-slide">
+          <a href="{{ block.settings.a_link }}">
+            <img
+              class="allImage"
+              loading="lazy"
+              src="{{block.settings.c_pic | image_url: width: 500}}">
+
+          </a>
+
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  <div class="gunchung-button-box">
+    <div class="swiper-button-prev"></div>
+    <div class="gunchung-product-title">
+      {%- for block in section.blocks -%}
+        <span>
+          <p>
+            <a
+              class="CD-M-title"
+              style="
+                                            --gunchung-carousel-drag-M-title-FS:{{ section.settings.CD-M-title-FS }}px;
+                                            --gunchung-carousel-drag-M-title-Fw:{{ section.settings.CD-M-title-Fw }};
+                                            --gunchung-carousel-drag-M-title-col:{{ section.settings.CD-M-title-col }};
+                                            --gunchung-carousel-drag-M-title-H-col:{{ section.settings.CD-M-title-H-col }};
+                                          "
+              href="{{ block.settings.a_link }}">{{ block.settings.t_text }}</a>
+          </p>
+          <p>
+            <a
+              class="CD-S-title"
+              style="
+                                        --gunchung-carousel-drag-S-con-FS:{{ section.settings.CD-S-con-FS }}px;
+                                        --gunchung-carousel-drag-S-con-Fw:{{ section.settings.CD-S-con-Fw }};
+                                        --gunchung-carousel-drag-S-con-col:{{ section.settings.CD-S-con-col }};
+                                        --gunchung-carousel-drag-S-con-H-col:{{ section.settings.CD-S-con-H-col }};
+                                      "
+              href="{{ block.settings.a_link }}">{{ block.settings.c_text }}</a>
+          </p>
+        </span>
+      {%- endfor -%}
+    </div>
+    <div class="swiper-button-next"></div>
+  </div>
+</div>
+<script>
+
+  (function() {
+    var swiper = new Swiper('#gunchung-slide-container', {
+      slidesPerView: 5,
+      spaceBetween: 30,
+      centeredSlides: true,
+      loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
+      on: {
+        slideChange: function() {
+          let spanTitle = $(".gunchung-product-title>span").eq(this.realIndex);
+          spanTitle.addClass("show").siblings().removeClass("show");
+        }
+      },
+      breakpoints: {
+        1500: {
+          slidesPerView: 5,
+          spaceBetween: 30
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 30
+        },
+        0: {
+          slidesPerView: 1,
+          spaceBetween: 0
+        }
+      }
+    });
+
+  })()
+</script>
+{% schema %}
+  {
+    "name": "光程聚焦轮播",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "背景设置"
+      },
+      {
+        "type": "color",
+        "label": "组件背景颜色",
+        "id": "CD-box-back-col",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "header",
+        "content": "商品名称设置"
+      },
+      {
+        "type": "range",
+        "label": "商品名称字体大小",
+        "id": "CD-M-title-FS",
+        "min": 16,
+        "max": 70,
+        "step": 1,
+        "unit": "px",
+        "default": 32
+      }, {
+        "type": "range",
+        "label": "商品名称字体粗细",
+        "id": "CD-M-title-FW",
+        "min": 100,
+        "max": 700,
+        "step": 100,
+        "default": 600
+      }, {
+        "type": "color",
+        "label": "商品名称字体颜色",
+        "id": "CD-M-title-col",
+        "default": "#000000"
+      }, {
+        "type": "color",
+        "label": "商品名称鼠标移入字体颜色",
+        "id": "CD-M-title-H-col",
+        "default": "#f0f0f0"
+      }, {
+        "type": "header",
+        "content": "商品介绍设置"
+      }, {
+        "type": "range",
+        "label": "商品介绍字体大小",
+        "id": "CD-S-con-FS",
+        "min": 10,
+        "max": 60,
+        "step": 1,
+        "unit": "px",
+        "default": 26
+      }, {
+        "type": "range",
+        "label": "商品介绍字体粗细",
+        "id": "CD-S-con-FW",
+        "min": 100,
+        "max": 700,
+        "step": 100,
+        "default": 400
+      }, {
+        "type": "color",
+        "label": "商品介绍字体颜色",
+        "id": "CD-S-con-col",
+        "default": "#000000"
+      }, {
+        "type": "color",
+        "label": "商品介绍鼠标移入字体颜色",
+        "id": "CD-S-con-H-col",
+        "default": "#f0f0f0"
+      }
+
+    ],
+    "blocks": [
+      {
+        "type": "item",
+        "name": "轮播子元素",
+        "settings": [
+          {
+            "type": "header",
+            "content": "轮播子元素设置"
+          },
+          {
+            "type": "image_picker",
+            "id": "c_pic",
+            "label": "图片（选择与背景色一致的图片效果更好）"
+          },
+          {
+            "type": "text",
+            "id": "t_text",
+            "label": "商品名称",
+            "default": "ABCD"
+          },
+          {
+            "type": "textarea",
+            "id": "c_text",
+            "label": "商品简介",
+            "default": "Welcome to our website!Welcome to our website!"
+          }, {
+            "type": "text",
+            "id": "a_link",
+            "label": "商品链接"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "光程聚焦轮播"
+      }
+    ],
+    "locales": {},
+    "enabled_on": {
+      "templates": ["*"],
+      "groups": ["*"]
+    }
+  }
+{% endschema %}

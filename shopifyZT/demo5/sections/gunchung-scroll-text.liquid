@@ -1,0 +1,265 @@
+{{ 'gunchung-scroll-text.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+    #shopify-section-{{ section.id }} .gunchung-scroll-text-container{
+        --alignment: {{ section.settings.alignment }};
+        --background: {{ section.settings.bg_color }};
+        --height: {{ section.settings.height }}px;
+        --font-size: {{ section.settings.f_size }}px;
+        --font-weight: {{ section.settings.f_weight }};
+        --color: {{ section.settings.color }};
+        --border-top: {{ section.settings.bt_width }}px;
+        --border-bottom: {{ section.settings.bb_width }}px;
+        --border-color: {{ section.settings.b_color }};
+        --icon-size: {{ section.settings.i_size }}px;
+    }
+{%- endstyle -%}
+<gunchung-scroll data-direction="{{ section.settings.direction }}" data-speed="{{ section.settings.speed }}" class="gunchung-scroll-text-container gunchung-scroll-item-width-{{ section.settings.item_width }}">
+    {%- for block in section.blocks -%}
+        <div class="gunchung-scroll-item">
+            {%- if block.settings.icon_svg -%}
+                {{ block.settings.icon_svg }}
+            {%- endif -%}
+            <span>{{ block.settings.text }}</span>
+        </div>
+    {%- endfor -%}
+</gunchung-scroll>
+{% schema %}
+{
+  "name": "光程滚动字幕",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "header",
+      "content": "容器设置"
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "滚动方向",
+      "options": [
+        {
+          "label": "向左",
+          "value": "left"
+        },
+        {
+          "label": "向右",
+          "value": "right"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "label": "滚动速度",
+      "id": "speed",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "label": "对齐方式",
+      "id": "alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "label": "背景颜色",
+      "id": "bg_color",
+      "type": "color",
+      "default": "#000000"
+    },
+    {
+      "label": "高度",
+      "id": "height",
+      "type": "range",
+      "min": 20,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "子元素设置"
+    },
+    {
+      "type": "select",
+      "label": "同屏显示的的数量",
+      "id": "item_width",
+      "default": "1-3",
+      "info": "请添加足够的子元素数量让其可以循环滚动",
+      "options": [
+        {
+          "value": "1-6",
+          "label": "6"
+        },
+        {
+          "value": "1-5",
+          "label": "5"
+        },
+        {
+          "value": "1-4",
+          "label": "4"
+        },
+        {
+          "value": "1-3",
+          "label": "3"
+        },
+        {
+          "value": "1-2",
+          "label": "2"
+        },
+        {
+          "value": "1-1",
+          "label": "1"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "+ 图标设置"
+    },
+    {
+      "type": "range",
+      "label": "图标大小",
+      "id": "i_size",
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "paragraph",
+      "content": "+ 文本设置"
+    },
+    {
+      "type": "range",
+      "label": "字体大小",
+      "id": "f_size",
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "label": "字体粗细",
+      "id": "f_weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "default": 400
+    },
+    {
+      "label": "文字颜色",
+      "id": "color",
+      "type": "color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "paragraph",
+      "content": "+ 边框设置"
+    },
+    {
+      "type": "range",
+      "id": "bt_width",
+      "label": "上边框粗细",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "bb_width",
+      "label": "下边框粗细",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "label": "边框颜色",
+      "id": "b_color",
+      "type": "color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "子元素",
+      "settings": [
+        {
+          "type": "header",
+          "content": "子元素设置"
+        },
+        {
+          "type":"textarea",
+          "id": "icon_svg",
+          "label": "图标SVG",
+          "info": "可以通过网站获取图标，[详情](https://www.svgrepo.com/)"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "文本",
+          "default": "Welcome to our website!"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "光程滚动字幕",
+      "settings": {
+        "direction": "left",
+        "speed": 4,
+        "item_width": "1-3"
+      },
+      "blocks": [
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "item"
+        }
+      ]
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Slideshow"
+    },
+    "fr": {
+      "title": "Diaporama"
+    }
+  },
+  "enabled_on": {
+    "templates": ["*"],
+    "groups": ["*"]
+  }
+}
+{% endschema %}

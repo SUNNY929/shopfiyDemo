@@ -1,0 +1,246 @@
+{{ 'gunchung-wave.css' | asset_url | stylesheet_tag }}
+{% style %}
+  #shopify-section-{{ section.id }} .gunchung-wave-wrap .gunchung-wave-item{
+    {%- if section.settings.shape == 'wave'  -%}
+      background-image: url('data:image/svg+xml;utf8,<svg preserveAspectRatio="none" viewBox="0 0 1424 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="{{ section.settings.color | replace: "#", "%23" }}" d="M 0 1 C 355.5 1 355.5 194 712 194 L 712 194 L 712 0 L 0 0 Z" stroke-width="0"></path><path fill="{{ section.settings.color | replace: "#", "%23" }}" d="M 712 194 C 1075 194 1075 1 1440 1 L 1440 1 L 1440 0 L 712 0 Z" stroke-width="0"></path></svg>');
+    {%- else -%}
+      background-image: url('data:image/svg+xml;utf8,<svg preserveAspectRatio="none" viewBox="0 0 1424 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="{{ section.settings.color | replace: "#", "%23" }}" d="M 0 1 L 712 194 L 712 0 L 0 0 Z" stroke-width="0"></path><path fill="{{ section.settings.color | replace: "#", "%23" }}" d="M 712 194 L 1440 1 L 1440 0 L 712 0 Z" stroke-width="0"></path></svg>');
+    {%- endif -%}
+  }
+{% endstyle %}
+<div class="gunchung-wave-container gunchung-wave-direction-{{ section.settings.direction }}"
+     style="
+     --gunchung-wave-width: {{ 100 | divided_by: section.settings.width }}%;
+     --gunchung-wave-height: {{ section.settings.height }}px;
+     --gunchung-wave-width-mb: {{ 100 | divided_by: section.settings.width-mb }}%;
+     --gunchung-wave-height-mb: {{ section.settings.height-mb }}px;
+     --gunchung-wave-color: {{ section.settings.color }};">
+  <div class="{% if section.settings.c_type == 'wrap' %}page-width {% endif %}gunchung-wave-wrap">
+    {%- if section.settings.animation == 'scroll' -%}
+      <gunchung-scroll data-direction="{{ section.settings.s_direction }}" data-speed="{{ section.settings.speed }}" class="gunchung-waves">
+        <div class="gunchung-scroll-item gunchung-wave-item"></div>
+      </gunchung-scroll>
+    {%- else -%}
+      <div class="gunchung-waves">
+        <div class="gunchung-wave-item"></div>
+      </div>
+    {%- endif -%}
+</div>
+{% schema %}
+{
+  "name": "光程波浪线",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "容器设置"
+    },
+    {
+      "type": "select",
+      "label": "容器类型",
+      "id": "c_type",
+      "default": "wrap",
+      "options": [
+        {
+          "label": "容器",
+          "value": "wrap"
+        },
+        {
+          "label": "全宽",
+          "value": "full"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "波浪线设置"
+    },
+    {
+      "type": "select",
+      "label": "形状",
+      "id": "shape",
+      "default": "wave",
+      "options": [
+        {
+          "label": "波浪",
+          "value": "wave"
+        },
+        {
+          "label": "锯齿",
+          "value": "tooth"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "label": "方向",
+      "id": "direction",
+      "default": "top",
+      "options": [
+        {
+          "label": "朝上",
+          "value": "top"
+        },
+        {
+          "label": "朝下",
+          "value": "bottom"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "波浪数(pc)",
+      "options": [
+        {
+          "label": "1",
+          "value": "1"
+        },
+        {
+          "label": "2",
+          "value": "2"
+        },
+        {
+          "label": "4",
+          "value": "4"
+        },
+        {
+          "label": "5",
+          "value": "5"
+        },
+        {
+          "label": "8",
+          "value": "8"
+        },
+        {
+          "label": "10",
+          "value": "10"
+        },
+        {
+          "label": "20",
+          "value": "20"
+        }
+      ],
+      "default": "5"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "单位波高度(pc)",
+      "min": 10,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "width-mb",
+      "label": "波浪数(mobile)",
+      "options": [
+        {
+          "label": "1",
+          "value": "1"
+        },
+        {
+          "label": "2",
+          "value": "2"
+        },
+        {
+          "label": "4",
+          "value": "4"
+        },
+        {
+          "label": "5",
+          "value": "5"
+        },
+        {
+          "label": "8",
+          "value": "8"
+        },
+        {
+          "label": "10",
+          "value": "10"
+        },
+        {
+          "label": "20",
+          "value": "20"
+        } 
+      ],
+      "default": "5"
+    },
+    {
+      "type": "range",
+      "id": "height-mb",
+      "label": "单位波高度(mobile)",
+      "min": 10,
+      "max": 500,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "颜色",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "select",
+      "id": "animation",
+      "label": "动画效果",
+      "options": [
+        {
+          "label": "无",
+          "value": "none"
+        },
+        {
+          "label": "滚动",
+          "value": "scroll"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "label": "滚动速度",
+      "id": "speed",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "s_direction",
+      "label": "滚动方向",
+      "options": [
+        {
+          "label": "向左",
+          "value": "left"
+        },
+        {
+          "label": "向右",
+          "value": "right"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "光程波浪线"
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Slideshow"
+    },
+    "fr": {
+      "title": "Diaporama"
+    }
+  },
+  "enabled_on": {
+    "templates": ["*"],
+    "groups": ["*"]
+  }
+}
+{% endschema %}

@@ -1,0 +1,109 @@
+.gunchung-tab-box {
+    max-width: 1200px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+.gunchung-tab-top {
+    display: flex;
+    flex-flow: row nowrap;
+}
+.gunchung-tab-top-box {
+    /* height: 260px; */
+    overflow: hidden;
+    position: relative;
+}
+.gunchung-tab-top-box:first-child {
+    width: 16.6%;
+}
+.gunchung-tab-top-box:not(:first-child) {
+    width: 83.3%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+.gunchung-tab-top-box:first-child > img {
+    width: 100%;
+    height: 100%;
+}
+.gunchung-tab-top-box-block {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 10px;
+    height: 100%;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.gunchung-tab-top-box-btn {
+    width: 100%;
+    background-color: var(--gunchung-tab-card-M-BG-col);
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    cursor: pointer;
+    line-height: 50px;
+    text-align: center;
+    font-size: var(--gunchung-tab-card-M-title-FS);
+    font-weight: var(--gunchung-tab-card-M-title-FW);
+    color: var(--gunchung-tab-card-M-title-col);
+}
+.gunchung-tab-con {
+    width: 100%;
+    margin-top: 20px;
+    display: none;
+}
+.gunchung-tab-con-box {
+    display: flex;
+    flex-flow: row nowrap;
+    min-height: 60px;
+    margin-bottom: 15px;
+}
+.gunchung-tab-con-left {
+    min-width: 16.6%;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--gunchung-tab-card-S-BG-col);
+}
+.gunchung-tab-con-left > div {
+    width: 80%;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: var(--gunchung-tab-card-S-title-FS);
+    font-weight: var(--gunchung-tab-card-S-title-FW);
+    color: var(--gunchung-tab-card-S-title-col);
+}
+.gunchung-tab-con-left > img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+    left: 0;
+}
+.gunchung-tab-con-right {
+    width: 83.3%;
+    /* flex: 8; */
+    display: flex;
+    flex-flow: row nowrap;
+}
+.gunchung-tab-con-right > div {
+    width: 100%;
+    margin:0 10px;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: var(--gunchung-tab-card-C-title-FS);
+    font-weight: var(--gunchung-tab-card-C-title-FW);
+    color: var(--gunchung-tab-card-C-title-col);
+    background-color: var(--gunchung-tab-card-C-BG-col);
+}
+.active {
+    color: var(--gunchung-tab-card-M-title-hover-col) !important;
+}
+.show {
+    display: block;
+}

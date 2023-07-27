@@ -1,0 +1,147 @@
+{%- style -%}
+    .gunchung-breadcrumb-container{
+        background: {{section.settings.bg_color}};
+        padding-top: {{section.settings.t_padding}}px;
+        padding-bottom: {{section.settings.b_padding}}px;
+
+    }
+    .gunchung-breadcrumb-container>nav{
+        display: flex;
+        column-gap: 5px;
+        flex-wrap: wrap;
+        font-size: {{section.settings.f_size}}px;
+        font-weight: {{section.settings.f_weight}};
+    }
+    .breadcrumb__home{
+        display: flex;
+        align-items: center;
+        column-gap: 3px;
+    }
+    .breadcrumb__home svg{
+        height: {{ section.settings.f_size | plus: 5 }}px !important;
+        width: {{section.settings.f_size | plus: 5 }}px !important;
+    }
+    .breadcrumb a{
+        color: {{section.settings.f_color}} !important;
+        text-decoration-line: none;
+    }
+    .breadcrumb__current,
+    .breadcrumb__separator
+    {
+        color: {{section.settings.cf_color}};
+    }
+{%- endstyle -%}
+{% unless template contains 'index' %}
+    <div class="gunchung-breadcrumb-container">
+        <nav class="breadcrumb page-width" role="navigation" aria-label="breadcrumbs">
+            <a href="/" title="Home" class="breadcrumb__home">
+                {%- if section.settings.home_icon != blank -%}
+                    {{ section.settings.home_icon }}
+                {%- endif -%}
+                <span>Home</span>
+            </a>
+            <span class="breadcrumb__separator">›</span>
+            {% if template.name == 'product' %}
+                {% assign first_collection = product.collections | first %}
+                {%- if first_collection != blank -%}
+                    <a href="/collections/{{ first_collection.handle }}">{{ first_collection.title }}</a>
+                    <span class="breadcrumb__separator">›</span>
+                {%- endif -%}
+                <span class="breadcrumb__current">{{ product.title }}</span>
+            {% elsif template.name == 'collection' %}
+                <span class="breadcrumb__current">{{ collection.title }}</span>
+            {% elsif template.name == 'page' %}
+                <span class="breadcrumb__current">{{ page.title }}</span>
+            {% elsif template.name == 'blog' %}
+                <span class="breadcrumb__current">{{ blog.title }}</span>
+            {% elsif template.name == 'article' %}
+                <a href="/blogs/{{ blog.handle }}">{{ blog.title }}</a>
+                <span class="breadcrumb__separator">›</span>
+                <span class="breadcrumb__current">{{ article.title }}</span>
+            {% elsif template.name == 'cart' %}
+                <span class="breadcrumb__current">Cart</span>
+            {% endif %}
+        </nav>
+    </div>
+{% endunless %}
+
+{% schema %}
+{
+  "name": "光程面包屑",
+  "tag": "section",
+  "enabled_on": {
+    "templates": ["*"],
+    "groups": ["header"]
+  },
+  "limit": 1,
+  "settings": [
+    {
+      "label": "顶部间距",
+      "id": "t_padding",
+      "type": "range",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "label": "底部间距",
+      "id": "b_padding",
+      "type": "range",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "label": "背景颜色",
+      "id": "bg_color",
+      "type": "color",
+      "default": "#ffffff"
+    },
+    {
+      "label": "字体颜色",
+      "type": "color",
+      "id": "f_color",
+      "default": "#000000"
+    },
+    {
+      "label": "当前页面字体颜色",
+      "id": "cf_color",
+      "type": "color",
+      "default": "#000000"
+    },
+    {
+      "label": "字体大小",
+      "id": "f_size",
+      "type": "range",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "label": "字体粗细",
+      "id": "f_weight",
+      "type": "range",
+      "min": 200,
+      "max": 900,
+      "step": 100,
+      "default": 400
+    },
+    {
+      "type": "textarea",
+      "id": "home_icon",
+      "label": "首页图标"
+    }
+  ],
+  "presets": [
+    {
+      "name": "光程面包屑"
+    }
+  ]
+}
+{% endschema %}

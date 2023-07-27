@@ -1,0 +1,129 @@
+{{ 'gunchung-dividing-line.css' | asset_url | stylesheet_tag }}
+<div
+  class="gunchung-dividing-line-container"
+  style="
+    --gunchung-dividing-line-type:{{ section.settings.d_type }};
+    --gunchung-dividing-line-width: {{ section.settings.thickness }}px;
+    --gunchung-dividing-line-color: {{ section.settings.color }};
+    --gunchung-dividing-line-position-top: {{ section.settings.r_top }}px;
+    --gunchung-dividing-line-padding-top: {{ section.settings.p_top }}px;
+    --gunchung-dividing-line-padding-bottom: {{ section.settings.p_bottom }}px;
+  "
+>
+  <div class="{% if section.settings.c_type == 'wrap' %}page-width {% endif %} gunchung-dividing-line-wrap"></div>
+</div>
+{% schema %}
+{
+  "name": "光程分割线",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "容器设置"
+    },
+    {
+      "type": "select",
+      "label": "容器类型",
+      "id": "c_type",
+      "default": "wrap",
+      "options": [
+        {
+          "label": "容器",
+          "value": "wrap"
+        },
+        {
+          "label": "全宽",
+          "value": "full"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "label": "上下移动",
+      "id": "r_top",
+      "min": -50,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "label": "上边距",
+      "id": "p_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "label": "下边距",
+      "id": "p_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "分割线设置"
+    },
+    {
+      "type": "select",
+      "label": "类型",
+      "id": "d_type",
+      "default": "solid",
+      "options": [
+        {
+          "label": "实线",
+          "value": "solid"
+        },
+        {
+          "label": "虚线",
+          "value": "dashed"
+        },
+        {
+          "label": "点状",
+          "value": "dotted"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "thickness",
+      "label": "粗细",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "颜色",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "光程分割线"
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Slideshow"
+    },
+    "fr": {
+      "title": "Diaporama"
+    }
+  },
+  "enabled_on": {
+    "templates": ["*"],
+    "groups": ["*"]
+  }
+}
+{% endschema %}
